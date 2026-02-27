@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>Play War Thunder Free – PC Military Combat Game</title>
+<meta name="description" content="Play War Thunder free on PC. Realistic air, tank and naval battles. Download and join millions of players worldwide.">
+
+<style>
+body {
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#0b0f14;
+    color:#ffffff;
+}
+
+.topbar {
+    background:#111821;
+    text-align:center;
+    padding:10px;
+    font-size:14px;
+    color:#f44336;
+}
+
+header {
+    background:linear-gradient(to right,#0f1923,#1b2a3a);
+    padding:70px 20px;
+    text-align:center;
+}
+
+h1 { font-size:48px; margin-bottom:15px; }
+h2 { color:#f44336; }
+
+.section {
+    width:1100px;
+    margin:auto;
+    padding:60px 20px;
+    text-align:center;
+}
+
+.features {
+    display:flex;
+    justify-content:space-between;
+    margin-top:40px;
+}
+
+.feature-box {
+    width:30%;
+    background:#111821;
+    padding:25px;
+    border-radius:8px;
+}
+
+.cta-button {
+    display:inline-block;
+    background:#f44336;
+    color:white;
+    padding:18px 40px;
+    font-size:20px;
+    text-decoration:none;
+    border-radius:6px;
+    margin-top:30px;
+    transition:0.3s;
+}
+
+.cta-button:hover { background:#ff1e00; }
+
+.sticky-cta {
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#f44336;
+    padding:15px 30px;
+    border-radius:50px;
+    font-size:18px;
+    text-decoration:none;
+    color:white;
+    box-shadow:0 0 15px rgba(0,0,0,0.6);
+}
+
+.countdown {
+    font-size:22px;
+    margin-top:15px;
+    color:#ffcc00;
+}
+
+.footer {
+    text-align:center;
+    padding:30px;
+    background:#0a0e13;
+    font-size:14px;
+    color:#888;
+}
+iframe { margin-top:30px; border-radius:10px; }
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+    <span id="localizedDate"></span> | <span id="clickCount">0</span> Players Joined Today
+</div>
+
+<header>
+    <h1 id="headline">Dominate the Battlefield</h1>
+    <p id="subheadline">The Ultimate Free Military Combat Experience for PC</p>
+    <div class="countdown">
+        Special Event Ends In: <span id="timer"></span>
+    </div>
+    <a href="http://convert.ctypy.com/aff_c?offer_id=29176&aff_id=21885" 
+       class="cta-button" onclick="trackClick()">Play War Thunder FREE Now</a>
+</header>
+
+<div class="section">
+    <h2 id="whyTitle">Why Players Love It</h2>
+
+    <div class="features">
+        <div class="feature-box">
+            <h3>✈ Air Combat</h3>
+            <p>Realistic dogfights with WWII aircraft and modern jets.</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>🚜 Tank Battles</h3>
+            <p>Authentic armor physics and tactical ground warfare.</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>🚢 Naval Warfare</h3>
+            <p>Massive sea battles with destroyers and cruisers.</p>
+        </div>
+    </div>
+
+    <iframe width="900" height="500"
+        src="https://www.youtube.com/embed/pzgPXOw2plI"
+        allowfullscreen>
+    </iframe>
+
+    <br>
+
+    <a href="http://convert.ctypy.com/aff_c?offer_id=29176&aff_id=21885" 
+       class="cta-button" onclick="trackClick()">Download & Play Now</a>
+</div>
+
+<a href="http://convert.ctypy.com/aff_c?offer_id=29176&aff_id=21885" 
+   class="sticky-cta" onclick="trackClick()">PLAY FREE</a>
+
+<div class="footer">
+This site is not affiliated with the publisher. All trademarks belong to their respective owners.
+</div>
+
+<script>
+// DATE
+function updateDate() {
+    const today = new Date();
+    document.getElementById("localizedDate").innerText =
+        today.toLocaleDateString(navigator.language, {year:'numeric', month:'long', day:'numeric'});
+}
+updateDate();
+
+// COUNTDOWN (7 days rolling)
+function startCountdown() {
+    const end = new Date();
+    end.setDate(end.getDate() + 7);
+
+    setInterval(function(){
+        const now = new Date().getTime();
+        const distance = end - now;
+
+        const days = Math.floor(distance / (1000*60*60*24));
+        const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+        const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+
+        document.getElementById("timer").innerText =
+            days+"d "+hours+"h "+minutes+"m";
+    },1000);
+}
+startCountdown();
+
+// CLICK TRACKER (local session)
+let clicks = 0;
+function trackClick(){
+    clicks++;
+    document.getElementById("clickCount").innerText = clicks;
+    console.log("Affiliate Click:", clicks);
+}
+
+// AUTO LANGUAGE SWITCH
+const lang = navigator.language.substring(0,2);
+
+const translations = {
+    fr: {
+        headline:"Dominez le Champ de Bataille",
+        sub:"Le jeu de combat militaire gratuit ultime sur PC",
+        why:"Pourquoi les joueurs adorent"
+    },
+    de: {
+        headline:"Beherrsche das Schlachtfeld",
+        sub:"Das ultimative kostenlose Militärspiel für PC",
+        why:"Warum Spieler es lieben"
+    },
+    ko: {
+        headline:"전장을 지배하라",
+        sub:"PC에서 즐기는 최고의 무료 군사 전투 게임",
+        why:"플레이어들이 사랑하는 이유"
+    }
+};
+
+if(translations[lang]){
+    document.getElementById("headline").innerText = translations[lang].headline;
+    document.getElementById("subheadline").innerText = translations[lang].sub;
+    document.getElementById("whyTitle").innerText = translations[lang].why;
+}
+</script>
+
+</body>
+</html>

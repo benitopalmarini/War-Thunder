@@ -91,11 +91,17 @@ h2 { color:#f44336; }
     font-size:14px;
     color:#888;
 }
+
 iframe { margin-top:30px; border-radius:10px; }
 </style>
 </head>
 
 <body>
+
+<!-- AMBIENT SOUND -->
+<audio id="bgSound" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/02/15/audio_d2c745c4d4.mp3?filename=war-battlefield-ambient-112675.mp3" type="audio/mpeg">
+</audio>
 
 <div class="topbar">
     <span id="localizedDate"></span> | <span id="clickCount">0</span> Players Joined Today
@@ -108,7 +114,7 @@ iframe { margin-top:30px; border-radius:10px; }
         Special Event Ends In: <span id="timer"></span>
     </div>
     <a href="http://convert.ctypy.com/aff_c?offer_id=29176&aff_id=21885" 
-       class="cta-button" onclick="trackClick()">Play War Thunder FREE Now</a>
+       class="cta-button" onclick="trackClick();playClickSound()">Play War Thunder FREE Now</a>
 </header>
 
 <div class="section">
@@ -139,11 +145,11 @@ iframe { margin-top:30px; border-radius:10px; }
     <br>
 
     <a href="http://convert.ctypy.com/aff_c?offer_id=29176&aff_id=21885" 
-       class="cta-button" onclick="trackClick()">Download & Play Now</a>
+       class="cta-button" onclick="trackClick();playClickSound()">Download & Play Now</a>
 </div>
 
 <a href="http://convert.ctypy.com/aff_c?offer_id=29176&aff_id=21885" 
-   class="sticky-cta" onclick="trackClick()">PLAY FREE</a>
+   class="sticky-cta" onclick="trackClick();playClickSound()">PLAY FREE</a>
 
 <div class="footer">
 This site is not affiliated with the publisher. All trademarks belong to their respective owners.
@@ -185,6 +191,12 @@ function trackClick(){
     console.log("Affiliate Click:", clicks);
 }
 
+// CTA CLICK SOUND
+function playClickSound(){
+    const clickAudio = new Audio("https://cdn.pixabay.com/download/audio/2021/08/04/audio_5a8b6b5984.mp3?filename=click-117968.mp3");
+    clickAudio.play();
+}
+
 // AUTO LANGUAGE SWITCH
 const lang = navigator.language.substring(0,2);
 
@@ -211,8 +223,10 @@ if(translations[lang]){
     document.getElementById("subheadline").innerText = translations[lang].sub;
     document.getElementById("whyTitle").innerText = translations[lang].why;
 }
+
+// OPTIONAL: Allow users to mute background
+document.getElementById('bgSound').volume = 0.2; // light ambient
 </script>
 
 </body>
 </html>
-

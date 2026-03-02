@@ -2,230 +2,196 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1200">
-<title>Play War Thunder Free – PC Military Combat Game</title>
-<meta name="description" content="Play War Thunder free on PC. Realistic air, tank and naval battles. Download and join millions of players worldwide.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>War Thunder - Dominate the Battlefield</title>
 
 <style>
 body {
-    margin:0;
-    font-family: Arial, Helvetica, sans-serif;
-    background:#0b0f14;
-    color:#ffffff;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #0f0f0f;
+    color: white;
 }
 
-.topbar {
-    background:#111821;
-    text-align:center;
-    padding:10px;
-    font-size:14px;
-    color:#f44336;
-}
-
+/* HERO */
 header {
-    background:linear-gradient(to right,#0f1923,#1b2a3a);
-    padding:70px 20px;
-    text-align:center;
+    background: url('https://warthunder.com/i/opengraph-wt.jpg') center/cover no-repeat;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    background-blend-mode: overlay;
+    background-color: rgba(0,0,0,0.6);
+    cursor: pointer;
 }
 
-h1 { font-size:48px; margin-bottom:15px; }
-h2 { color:#f44336; }
+header h1 {
+    font-size: 4rem;
+    margin: 0;
+    color: #ff3c00;
+    text-shadow: 2px 2px 10px black;
+}
 
-.section {
-    width:1100px;
-    margin:auto;
-    padding:60px 20px;
-    text-align:center;
+header p {
+    font-size: 1.5rem;
+    max-width: 600px;
+}
+
+.btn {
+    margin-top: 20px;
+    padding: 15px 30px;
+    background-color: #ff3c00;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #cc2f00;
+}
+
+section {
+    padding: 60px 20px;
+    text-align: center;
 }
 
 .features {
-    display:flex;
-    justify-content:space-between;
-    margin-top:40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: auto;
 }
 
 .feature-box {
-    width:30%;
-    background:#111821;
-    padding:25px;
-    border-radius:8px;
+    background-color: #1c1c1c;
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s;
 }
 
-.cta-button {
-    display:inline-block;
-    background:#f44336;
-    color:white;
-    padding:18px 40px;
-    font-size:20px;
-    text-decoration:none;
-    border-radius:6px;
-    margin-top:30px;
-    transition:0.3s;
+.feature-box:hover {
+    transform: translateY(-10px);
 }
 
-.cta-button:hover { background:#ff1e00; }
-
-.sticky-cta {
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background:#f44336;
-    padding:15px 30px;
-    border-radius:50px;
-    font-size:18px;
-    text-decoration:none;
-    color:white;
-    box-shadow:0 0 15px rgba(0,0,0,0.6);
+footer {
+    background-color: black;
+    padding: 20px;
+    text-align: center;
+    font-size: 0.9rem;
 }
 
-.countdown {
-    font-size:22px;
-    margin-top:15px;
-    color:#ffcc00;
+/* POPUP */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
 }
 
-.footer {
-    text-align:center;
-    padding:30px;
-    background:#0a0e13;
-    font-size:14px;
-    color:#888;
+.popup {
+    background: #1c1c1c;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    animation: fadeIn 0.4s ease-in-out;
 }
 
-iframe { margin-top:30px; border-radius:10px; }
+.popup h2 {
+    margin-top: 0;
+    color: #ff3c00;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
 </style>
 </head>
 
 <body>
 
-<!-- AMBIENT SOUND -->
-<audio id="bgSound" autoplay loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/02/15/audio_d2c745c4d4.mp3?filename=war-battlefield-ambient-112675.mp3" type="audio/mpeg">
-</audio>
-
-<div class="topbar">
-    <span id="localizedDate"></span> | <span id="clickCount">0</span> Players Joined Today
-</div>
-
-<header>
-    <h1 id="headline">Dominate the Battlefield</h1>
-    <p id="subheadline">The Ultimate Free Military Combat Experience for PC</p>
-    <div class="countdown">
-        Special Event Ends In: <span id="timer"></span>
-    </div>
-    <a href="http://convert.ctypy.com/aff_c?offer_id=29176&aff_id=21885" 
-       class="cta-button" onclick="trackClick();playClickSound()">Play War Thunder FREE Now</a>
+<header onclick="redirectToOffer()">
+    <h1>War Thunder</h1>
+    <p>Experience massive combined battles across air, land, and sea in the ultimate military combat simulator.</p>
+    <div class="btn" onclick="redirectToOffer(event)">Play Now</div>
 </header>
 
-<div class="section">
-    <h2 id="whyTitle">Why Players Love It</h2>
-
+<section>
+    <h2>Why Play War Thunder?</h2>
     <div class="features">
         <div class="feature-box">
-            <h3>✈ Air Combat</h3>
-            <p>Realistic dogfights with WWII aircraft and modern jets.</p>
+            <h3>✈ Air Battles</h3>
+            <p>Dogfight in realistic WWII and modern aircraft.</p>
         </div>
-
         <div class="feature-box">
-            <h3>🚜 Tank Battles</h3>
-            <p>Authentic armor physics and tactical ground warfare.</p>
+            <h3>🛡 Ground Warfare</h3>
+            <p>Command legendary tanks in intense battles.</p>
         </div>
-
         <div class="feature-box">
-            <h3>🚢 Naval Warfare</h3>
-            <p>Massive sea battles with destroyers and cruisers.</p>
+            <h3>🚢 Naval Combat</h3>
+            <p>Control powerful warships in strategic warfare.</p>
         </div>
     </div>
+</section>
 
-    <iframe width="900" height="500"
-        src="https://www.youtube.com/embed/pzgPXOw2plI"
-        allowfullscreen>
-    </iframe>
+<section style="background-color:#141414;">
+    <h2>Join Millions of Players Worldwide</h2>
+    <p>Free-to-play. Cross-platform. Endless vehicles.</p>
+    <div class="btn" onclick="redirectToOffer(event)">Download Free</div>
+</section>
 
-    <br>
+<footer>
+    © 2026 War Thunder Fan Site | Not affiliated with Gaijin Entertainment
+</footer>
 
-    <a href="http://convert.ctypy.com/aff_c?offer_id=29176&aff_id=21885" 
-       class="cta-button" onclick="trackClick();playClickSound()">Download & Play Now</a>
-</div>
-
-<a href="http://convert.ctypy.com/aff_c?offer_id=29176&aff_id=21885" 
-   class="sticky-cta" onclick="trackClick();playClickSound()">PLAY FREE</a>
-
-<div class="footer">
-This site is not affiliated with the publisher. All trademarks belong to their respective owners.
+<!-- POPUP -->
+<div class="popup-overlay" id="popup">
+    <div class="popup">
+        <div class="close-btn" onclick="closePopup()">✖</div>
+        <h2>🎮 Ready for Battle?</h2>
+        <p>Join thousands of commanders dominating the skies and battlefield right now.</p>
+        <div class="btn" onclick="redirectToOffer()">Start Playing Free</div>
+    </div>
 </div>
 
 <script>
-// DATE
-function updateDate() {
-    const today = new Date();
-    document.getElementById("localizedDate").innerText =
-        today.toLocaleDateString(navigator.language, {year:'numeric', month:'long', day:'numeric'});
-}
-updateDate();
-
-// COUNTDOWN (7 days rolling)
-function startCountdown() {
-    const end = new Date();
-    end.setDate(end.getDate() + 7);
-
-    setInterval(function(){
-        const now = new Date().getTime();
-        const distance = end - now;
-
-        const days = Math.floor(distance / (1000*60*60*24));
-        const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-        const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
-
-        document.getElementById("timer").innerText =
-            days+"d "+hours+"h "+minutes+"m";
-    },1000);
-}
-startCountdown();
-
-// CLICK TRACKER (local session)
-let clicks = 0;
-function trackClick(){
-    clicks++;
-    document.getElementById("clickCount").innerText = clicks;
-    console.log("Affiliate Click:", clicks);
-}
-
-// CTA CLICK SOUND
-function playClickSound(){
-    const clickAudio = new Audio("https://cdn.pixabay.com/download/audio/2021/08/04/audio_5a8b6b5984.mp3?filename=click-117968.mp3");
-    clickAudio.play();
-}
-
-// AUTO LANGUAGE SWITCH
-const lang = navigator.language.substring(0,2);
-
-const translations = {
-    fr: {
-        headline:"Dominez le Champ de Bataille",
-        sub:"Le jeu de combat militaire gratuit ultime sur PC",
-        why:"Pourquoi les joueurs adorent"
-    },
-    de: {
-        headline:"Beherrsche das Schlachtfeld",
-        sub:"Das ultimative kostenlose Militärspiel für PC",
-        why:"Warum Spieler es lieben"
-    },
-    ko: {
-        headline:"전장을 지배하라",
-        sub:"PC에서 즐기는 최고의 무료 군사 전투 게임",
-        why:"플레이어들이 사랑하는 이유"
+function redirectToOffer(event) {
+    if (event) {
+        event.stopPropagation();
+        event.preventDefault();
     }
-};
-
-if(translations[lang]){
-    document.getElementById("headline").innerText = translations[lang].headline;
-    document.getElementById("subheadline").innerText = translations[lang].sub;
-    document.getElementById("whyTitle").innerText = translations[lang].why;
+    window.location.href = "https://convert.ctypy.com/aff_c?offer_id=29176&aff_id=21885";
 }
 
-// OPTIONAL: Allow users to mute background
-document.getElementById('bgSound').volume = 0.2; // light ambient
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+setTimeout(function() {
+    document.getElementById("popup").style.display = "flex";
+}, 5000);
 </script>
 
 </body>
